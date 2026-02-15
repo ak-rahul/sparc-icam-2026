@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { paperSubmissionSchema } from '@/lib/validations/schemas'
+
 export async function submitPaper(formData: FormData) {
     const supabase = await createClient()
 
@@ -13,9 +15,19 @@ export async function submitPaper(formData: FormData) {
         return { error: 'You must be logged in to submit a paper.' }
     }
 
-    const title = formData.get('title') as string
-    const abstract = formData.get('abstract') as string
-    const track = formData.get('track') as string
+    const rawData = {
+        title: formData.get('title'),
+        abstract: formData.get('abstract'),
+        track: formData.get('track'),
+    }
+
+    const validatedFields = paperSubmissionSchema.safeParse(rawData)
+
+    if (!validatedFields.success) {
+        return { error: 'Invalid submission data.' }
+    }
+
+    const { title, abstract, track } = validatedFields.data
     const paperFile = formData.get('paperFile') as File
     // Simple authors handling for MVP: just a string or assume it's the user
     // For production, we'd want a dynamic list of authors. 
@@ -38,15 +50,15 @@ export async function submitPaper(formData: FormData) {
 
     // Save paper details
     const { error: insertError } = await supabase
-        .from('papers')
+        .from('submissions')
         .insert({
-            uploader_id: user.id,
+            user_id: user.id,
             title,
             abstract,
             track,
             file_url: uploadData.path,
             status: 'submitted',
-            authors: [{ name: user.user_metadata.full_name, email: user.email }] // simplified for MVP
+            authors: user.user_metadata.full_name // simplified for MVP, just the submitter
         })
 
     if (insertError) {

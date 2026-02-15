@@ -13,11 +13,20 @@ export const metadata: Metadata = {
   description: "Official website for the International Conference on Advanced Research.",
 };
 
-export default function RootLayout({
+import { createClient } from "@/lib/supabase/server";
+
+// ... existing imports
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -28,7 +37,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative flex min-h-screen flex-col">
-            <SiteHeader />
+            <SiteHeader user={user} />
             <div className="flex-1">{children}</div>
             <SiteFooter />
             <Toaster />

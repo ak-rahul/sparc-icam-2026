@@ -6,11 +6,23 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { headers } from 'next/headers'
 
+import { loginSchema, signupSchema } from '@/lib/validations/schemas'
+
 export async function login(formData: FormData) {
     const supabase = await createClient()
 
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
+    const rawData = {
+        email: formData.get('email'),
+        password: formData.get('password'),
+    }
+
+    const validatedFields = loginSchema.safeParse(rawData)
+
+    if (!validatedFields.success) {
+        return { error: 'Invalid email or password format.' }
+    }
+
+    const { email, password } = validatedFields.data
 
     const { error } = await supabase.auth.signInWithPassword({
         email,
@@ -29,9 +41,19 @@ export async function signup(formData: FormData) {
     const origin = (await headers()).get('origin')
     const supabase = await createClient()
 
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const fullName = formData.get('fullName') as string
+    const rawData = {
+        email: formData.get('email'),
+        password: formData.get('password'),
+        fullName: formData.get('fullName'),
+    }
+
+    const validatedFields = signupSchema.safeParse(rawData)
+
+    if (!validatedFields.success) {
+        return { error: 'Invalid input data.' }
+    }
+
+    const { email, password, fullName } = validatedFields.data
 
     const { error } = await supabase.auth.signUp({
         email,
@@ -49,4 +71,11 @@ export async function signup(formData: FormData) {
     }
 
     return { success: 'Check your email to continue sign in process.' }
+}
+
+export async function signOut() {
+    const supabase = await createClient()
+    await supabase.auth.signOut()
+    revalidatePath('/', 'layout')
+    redirect('/login')
 }

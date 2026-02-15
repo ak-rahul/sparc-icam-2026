@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+import { registrationSchema } from '@/lib/validations/schemas'
+
 export async function registerParticipant(formData: FormData) {
     const supabase = await createClient()
 
@@ -13,9 +15,19 @@ export async function registerParticipant(formData: FormData) {
         return { error: 'You must be logged in to register.' }
     }
 
-    const fullName = formData.get('fullName') as string
-    const affiliation = formData.get('affiliation') as string
-    const category = formData.get('category') as string
+    const rawData = {
+        fullName: formData.get('fullName'),
+        affiliation: formData.get('affiliation'),
+        category: formData.get('category'),
+    }
+
+    const validatedFields = registrationSchema.safeParse(rawData)
+
+    if (!validatedFields.success) {
+        return { error: 'Invalid registration data.' }
+    }
+
+    const { fullName, affiliation, category } = validatedFields.data
     const paymentProof = formData.get('paymentProof') as File
 
     if (!paymentProof) {

@@ -1,14 +1,75 @@
 import { PageHeader } from "@/components/layout/page-header"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
+const committeeMembers = [
+    {
+        role: "General Chairs",
+        members: [
+            { name: "Prof. Alan Turing", affiliation: "University of Cambridge, UK", image: "https://i.pravatar.cc/150?u=alan" },
+            { name: "Dr. Grace Hopper", affiliation: "Yale University, USA", image: "https://i.pravatar.cc/150?u=grace" }
+        ]
+    },
+    {
+        role: "Program Chairs",
+        members: [
+            { name: "Dr. Ada Lovelace", affiliation: "University of Oxford, UK", image: "https://i.pravatar.cc/150?u=ada" },
+            { name: "Prof. John von Neumann", affiliation: "Princeton University, USA", image: "https://i.pravatar.cc/150?u=john" },
+            { name: "Dr. Claude Shannon", affiliation: "MIT, USA", image: "https://i.pravatar.cc/150?u=claude" }
+        ]
+    },
+    {
+        role: "Publication Chairs",
+        members: [
+            { name: "Dr. Tim Berners-Lee", affiliation: "CERN, Switzerland", image: "https://i.pravatar.cc/150?u=tim" },
+            { name: "Prof. Barbara Liskov", affiliation: "MIT, USA", image: "https://i.pravatar.cc/150?u=barbara" }
+        ]
+    },
+    {
+        role: "Local Organizing Committee",
+        members: [
+            { name: "Alice Smith", affiliation: "NY Tech Hub", image: "https://i.pravatar.cc/150?u=alice" },
+            { name: "Bob Johnson", affiliation: "Event Coordinators Inc.", image: "https://i.pravatar.cc/150?u=bob" },
+            { name: "Charlie Brown", affiliation: "City University of New York", image: "https://i.pravatar.cc/150?u=charlie" }
+        ]
+    }
+]
 
 export default function CommitteesPage() {
     return (
         <div className="flex flex-col min-h-screen">
             <PageHeader
                 title="Organizing Committee"
-                description="Meet the team behind ICAR 2024."
+                description="The dedicated team responsible for ICAR 2025."
             />
-            <div className="container py-12 px-4 md:px-6">
-                <p>Content coming soon...</p>
+
+            <div className="container py-12 px-4 md:px-6 space-y-12">
+                {committeeMembers.map((section, index) => (
+                    <div key={index} className="space-y-6">
+                        <h2 className="text-2xl font-bold border-b pb-2">{section.role}</h2>
+                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            {section.members.map((member, mIndex) => (
+                                <Card key={mIndex} className="flex items-center p-4 space-x-4 hover:bg-muted/50 transition-colors">
+                                    <Avatar className="h-16 w-16">
+                                        <AvatarImage src={member.image} alt={member.name} />
+                                        <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <p className="font-semibold text-lg">{member.name}</p>
+                                        <p className="text-sm text-muted-foreground">{member.affiliation}</p>
+                                    </div>
+                                </Card>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+
+                <div className="mt-16 p-8 bg-muted rounded-lg text-center">
+                    <h3 className="text-xl font-semibold mb-4">Join the Committee</h3>
+                    <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+                        We are always looking for volunteers to help organize future editions of ICAR. If you are interested in contributing, please reach out to us.
+                    </p>
+                </div>
             </div>
         </div>
     )

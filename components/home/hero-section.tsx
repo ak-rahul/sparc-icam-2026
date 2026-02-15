@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button"
 import { CountdownTimer } from "@/components/home/countdown-timer"
 
 export function HeroSection() {
-    // Set target date to October 15, 2024 (example)
-    const conferenceDate = new Date("2024-10-15T09:00:00") // TODO: Make configurable
+    // Set target date to October 15, 2025
+    const conferenceDate = new Date("2025-10-15T09:00:00")
 
     return (
         <section className="relative overflow-hidden py-24 lg:py-32 xl:py-40">
@@ -15,24 +15,24 @@ export function HeroSection() {
                     <div className="flex flex-col justify-center space-y-8">
                         <div className="space-y-4">
                             <div className="inline-flex items-center rounded-lg bg-muted px-3 py-1 text-sm font-medium">
-                                🎉 Registration Open Now
+                                🎉 Registration Open for 2025
                             </div>
                             <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl xl:text-6xl text-balance">
-                                International Conference on <span className="text-primary">Advanced Research</span> 2024
+                                International Conference on <span className="text-primary">Advanced Research</span> 2025
                             </h1>
                             <p className="max-w-[600px] text-lg text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                Join leading researchers and innovators sharing the latest breakthroughs in science and technology.
+                                Join leading researchers, innovators, and industry experts sharing the latest breakthroughs in AI, Data Science, and sustainable technology.
                             </p>
                         </div>
 
                         <div className="flex flex-col gap-4 sm:flex-row">
                             <div className="flex items-center gap-2 text-muted-foreground">
                                 <Calendar className="h-5 w-5 text-primary" />
-                                <span className="font-medium">October 15-16, 2024</span>
+                                <span className="font-medium">October 15-16, 2025</span>
                             </div>
                             <div className="flex items-center gap-2 text-muted-foreground">
                                 <MapPin className="h-5 w-5 text-primary" />
-                                <span className="font-medium">New York City, USA</span>
+                                <span className="font-medium">Grand Convention Center, New York</span>
                             </div>
                         </div>
 
@@ -57,11 +57,11 @@ export function HeroSection() {
                         <div className="w-full max-w-sm space-y-2 pt-4">
                             <div className="flex justify-between text-sm">
                                 <span className="text-muted-foreground">Paper Submission:</span>
-                                <span className="font-medium">Sept 1, 2024</span>
+                                <span className="font-medium">Sept 1, 2025</span>
                             </div>
                             <div className="flex justify-between text-sm">
                                 <span className="text-muted-foreground">Early Bird Reg:</span>
-                                <span className="font-medium">Sept 15, 2024</span>
+                                <span className="font-medium">Sept 15, 2025</span>
                             </div>
                         </div>
                     </div>

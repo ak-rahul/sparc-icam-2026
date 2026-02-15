@@ -26,10 +26,12 @@ export function AboutSection() {
                         </Button>
                     </div>
                     <div className="relative aspect-video overflow-hidden rounded-xl border bg-background shadow-xl">
-                        {/* Placeholder for an image or video */}
-                        <div className="absolute inset-0 flex items-center justify-center bg-muted">
-                            <span className="text-muted-foreground">Conference Highlight Video/Image</span>
-                        </div>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                            src="https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=1000&auto=format&fit=crop"
+                            alt="Conference Audience"
+                            className="object-cover w-full h-full"
+                        />
                     </div>
                 </div>
             </div>

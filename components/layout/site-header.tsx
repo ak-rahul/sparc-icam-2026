@@ -28,7 +28,13 @@ const routes = [
     { href: "/contact", label: "Contact" },
 ]
 
-export function SiteHeader() {
+import { User } from "@supabase/supabase-js"
+
+interface SiteHeaderProps {
+    user: User | null
+}
+
+export function SiteHeader({ user }: SiteHeaderProps) {
     const [isOpen, setIsOpen] = React.useState(false)
 
     return (
@@ -94,9 +100,15 @@ export function SiteHeader() {
                         {/* Search or other items */}
                     </div>
                     <nav className="flex items-center gap-2">
-                        <Button asChild variant="default" size="sm">
-                            <Link href="/login">Login / Register</Link>
-                        </Button>
+                        {user ? (
+                            <Button asChild variant="default" size="sm">
+                                <Link href="/dashboard">Dashboard</Link>
+                            </Button>
+                        ) : (
+                            <Button asChild variant="default" size="sm">
+                                <Link href="/login">Login / Register</Link>
+                            </Button>
+                        )}
                         <ModeToggle />
                     </nav>
                 </div>

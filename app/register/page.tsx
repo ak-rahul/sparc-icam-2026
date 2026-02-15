@@ -1,8 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Upload } from "lucide-react"
 import { toast } from "sonner"
+import Link from "next/link"
+import { createClient } from "@/lib/supabase/client"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -26,6 +28,19 @@ import { registerParticipant } from "./actions"
 
 export default function RegisterPage() {
     const [isLoading, setIsLoading] = useState(false)
+    const [user, setUser] = useState<any>(null)
+    const [pageLoading, setPageLoading] = useState(true)
+
+    const supabase = createClient()
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const { data: { user } } = await supabase.auth.getUser()
+            setUser(user)
+            setPageLoading(false)
+        }
+        checkUser()
+    }, [])
 
     async function handleSubmit(formData: FormData) {
         setIsLoading(true)
@@ -40,11 +55,39 @@ export default function RegisterPage() {
         }
     }
 
+    if (pageLoading) {
+        return <div className="flex h-screen items-center justify-center">Loading...</div>
+    }
+
+    if (!user) {
+        return (
+            <div className="flex flex-col min-h-screen">
+                <PageHeader
+                    title="Registration"
+                    description="Secure your spot at ICAR 2024."
+                />
+                <div className="container py-12 px-4 md:px-6 text-center">
+                    <Card className="max-w-md mx-auto">
+                        <CardHeader>
+                            <CardTitle>Login Required</CardTitle>
+                            <CardDescription>You must be logged in to register for the conference.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Button asChild className="w-full">
+                                <Link href="/login">Login / Sign Up</Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="flex flex-col min-h-screen">
             <PageHeader
                 title="Registration"
-                description="Secure your spot at ICAR 2024. Please login before registering."
+                description="Secure your spot at ICAR 2024."
             />
             <div className="container py-12 px-4 md:px-6">
                 <div className="mx-auto max-w-[600px]">
@@ -59,7 +102,7 @@ export default function RegisterPage() {
                             <form action={handleSubmit} className="space-y-6">
                                 <div className="space-y-2">
                                     <Label htmlFor="fullName">Full Name</Label>
-                                    <Input id="fullName" name="fullName" placeholder="Dr. Jane Doe" required />
+                                    <Input id="fullName" name="fullName" placeholder="Dr. Jane Doe" defaultValue={user.user_metadata?.full_name} required />
                                 </div>
 
                                 <div className="space-y-2">
