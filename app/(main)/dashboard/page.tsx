@@ -4,8 +4,8 @@ import { PageHeader } from '@/components/layout/page-header'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { FileText, User, LogOut } from 'lucide-react'
-import { signOut } from '@/app/(auth)/login/actions'
+import { FileText, User } from 'lucide-react'
+import { SignOutButton } from '@/components/auth/sign-out-button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 export default async function DashboardPage() {
@@ -39,12 +39,7 @@ export default async function DashboardPage() {
                     description={`Welcome back, ${user.user_metadata.full_name || 'User'}`}
                     className="pb-0"
                 />
-                <form action={signOut}>
-                    <Button variant="outline" size="sm">
-                        <LogOut className="mr-2 h-4 w-4" />
-                        Sign Out
-                    </Button>
-                </form>
+                <SignOutButton variant="outline" size="sm" />
             </div>
 
             <div className="container py-8 px-4 md:px-6">

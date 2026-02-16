@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server"
+import { CreateAdminDialog } from "./create-admin-dialog"
 import {
     Table,
     TableBody,
@@ -15,8 +16,9 @@ export default async function UsersPage() {
 
     return (
         <Card>
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle>All Users</CardTitle>
+                <CreateAdminDialog />
             </CardHeader>
             <CardContent>
                 <Table>

@@ -7,7 +7,7 @@ import { ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/mode-toggle"
 import { User } from "@supabase/supabase-js"
-import { signOut } from "@/app/(auth)/login/actions"
+import { SignOutButton } from "@/components/auth/sign-out-button"
 
 interface AdminHeaderProps {
     user: User | null
@@ -31,11 +31,9 @@ export function AdminHeader({ user }: AdminHeaderProps) {
                         <Button asChild variant="ghost" size="sm">
                             <Link href="/">View Site</Link>
                         </Button>
-                        <form action={signOut}>
-                            <Button variant="outline" size="sm">
-                                Logout
-                            </Button>
-                        </form>
+                        <SignOutButton variant="outline" size="sm" showIcon={false}>
+                            Logout
+                        </SignOutButton>
                         <ModeToggle />
                     </nav>
                 </div>

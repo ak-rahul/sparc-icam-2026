@@ -9,7 +9,7 @@ export function SiteFooter() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-2 font-bold text-xl">
                             <Globe className="h-6 w-6 text-primary" />
-                            <span>ICAR 2026</span>
+                            <span>ICAFM 2026</span>
                         </div>
                         <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
                             The premier international forum for researchers, scientists, and industry experts to discuss the latest advancements in technology and science.

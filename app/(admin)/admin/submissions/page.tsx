@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Download, Check, X } from "lucide-react"
+import { Download } from "lucide-react"
+import { SubmissionActions } from "./submission-actions"
 
 export default async function SubmissionsPage() {
     const supabase = await createClient()
@@ -63,12 +64,13 @@ export default async function SubmissionsPage() {
                                                 </Button>
                                             </a>
                                         )}
-                                        <Button size="icon" variant="outline" className="h-8 w-8 text-green-600">
-                                            <Check className="h-4 w-4" />
-                                        </Button>
-                                        <Button size="icon" variant="outline" className="h-8 w-8 text-red-600">
-                                            <X className="h-4 w-4" />
-                                        </Button>
+                                        <SubmissionActions
+                                            id={paper.id}
+                                            email={paper.user?.email}
+                                            name={paper.user?.full_name || 'Author'}
+                                            title={paper.title}
+                                            currentStatus={paper.status}
+                                        />
                                     </div>
                                 </TableCell>
                             </TableRow>

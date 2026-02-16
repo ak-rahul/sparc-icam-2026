@@ -1,19 +1,21 @@
-# International Conference on Advanced Research (ICAR) 2025
+# International Conference on Advanced Functional Materials (ICAFM) 2026
 
-A modern, full-featured conference website built with **Next.js 16**, **Supabase**, and **Shadcn UI**.
+A modern, full-stack conference management system built with **Next.js 15**, **Supabase**, and **Tailwind CSS**.
 
 ## 🚀 Features
 
-- **Authentication**: Secure user login and signup via Supabase Auth.
-- **Registration System**: Conference registration with payment proof upload.
-- **Paper Submission**: Multi-track paper submission system with PDF/DOCX upload.
-- **User Dashboard**: Track registration status and view submitted papers.
-- **Dynamic Content**:
-  - **Home**: Hero section with countdown timer, featured speakers, and sponsors.
-  - **Speakers**: Detailed speaker profiles and bios.
-  - **Schedule**: Interactive timeline of important dates.
-- **Admin Ready**: Database schema supports role-based access control (RLS).
-- **Responsive Design**: Fully responsive UI tailored for all devices.
+-   **Authentication**: Role-based access (Admin, Presenter, Attendee).
+-   **Registration**: Secure attendee registration with payment proof verification.
+-   **Paper Submission**: Link-based submission system for researchers (Google Drive/Dropbox).
+-   **Admin Dashboard**: comprehensive tools to manage users, registrations, and submissions.
+-   **Email System**: Professional automated notifications using Resend.
+-   **Responsive Design**: Mobile-first approach with "21st.dev" inspired aesthetics.
+
+## 📅 Important Dates
+
+-   **Conference**: March 05-06, 2026
+-   **Paper Submission Deadline**: Feb 01, 2026
+-   **Early Bird Registration**: Feb 15, 2026
 
 ## 🛠️ Tech Stack
 

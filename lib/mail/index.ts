@@ -1,40 +1,97 @@
 import { Resend } from 'resend';
+import { WelcomeEmail } from './templates/welcome-email';
+import { AdminInviteEmail } from './templates/admin-invite-email';
+import { PaperSubmissionEmail } from './templates/paper-submission-email';
+import { PaperStatusEmail } from './templates/paper-status-email';
 
-// Initialize Resend with API Key from environment variables
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend with API Key from environment variables safely
+const resendKey = process.env.RESEND_API_KEY;
+const resend = resendKey ? new Resend(resendKey) : null;
 
-export const sendWelcomeEmail = async (email: string, name: string) => {
-    if (!process.env.RESEND_API_KEY) {
-        console.log("Resend API Key missing. Skipping email.");
+export const sendWelcomeEmail = async (email: string, firstName: string, role: string) => {
+    if (!resend) {
+        console.warn("Resend API Key missing. Skipping email.");
         return;
     }
 
     try {
-        await resend.emails.send({
-            from: 'ICAR 2026 <noreply@icar2026.org>', // You'll need to verify a domain or use 'onboarding@resend.dev' for testing
+        const { error } = await resend.emails.send({
+            from: 'ICAFM 2026 <noreply@icafm2026.org>',
             to: email,
-            subject: 'Welcome to ICAR 2026!',
-            html: `<p>Hi ${name},</p><p>Thank you for registering for the International Conference on Advanced Research 2026.</p><p>We have received your registration details and will verify your payment proof shortly.</p><p>Best regards,<br>ICAR Team</p>`
+            subject: 'Welcome to ICAFM 2026! 🚀',
+            react: WelcomeEmail({ firstName, role }),
         });
+
+        if (error) {
+            console.error("Resend Error:", error);
+        }
     } catch (error) {
         console.error("Failed to send welcome email:", error);
     }
 };
 
-export const sendSubmissionReceipt = async (email: string, name: string, paperTitle: string) => {
-    if (!process.env.RESEND_API_KEY) {
-        console.log("Resend API Key missing. Skipping email.");
+export const sendAdminInvite = async (email: string, tempPass: string) => {
+    if (!resend) {
+        console.warn("Resend API Key missing. Skipping email.");
         return;
     }
 
     try {
-        await resend.emails.send({
-            from: 'ICAR 2026 <noreply@icar2026.org>',
+        const { error } = await resend.emails.send({
+            from: 'ICAFM Security <security@icafm2026.org>',
             to: email,
-            subject: 'Paper Submission Received - ICAR 2026',
-            html: `<p>Hi ${name},</p><p>We have received your paper submission: <strong>${paperTitle}</strong>.</p><p>Our committee will review it and notify you of the decision by Feb 20, 2026.</p><p>Best regards,<br>ICAR Team</p>`
+            subject: 'Restricted: Administrator Access Granted',
+            react: AdminInviteEmail({ email, tempPass }),
         });
+
+        if (error) {
+            console.error("Resend Error:", error);
+        }
+    } catch (error) {
+        console.error("Failed to send admin invite:", error);
+    }
+};
+
+export const sendSubmissionReceipt = async (email: string, name: string, paperTitle: string, track: string) => {
+    if (!resend) {
+        console.warn("Resend API Key missing. Skipping email.");
+        return;
+    }
+
+    try {
+        const { error } = await resend.emails.send({
+            from: 'ICAFM Submissions <submissions@icafm2026.org>',
+            to: email,
+            subject: 'Submission Received - ICAFM 2026',
+            react: PaperSubmissionEmail({ firstName: name, paperTitle, track }),
+        });
+
+        if (error) {
+            console.error("Resend Error:", error);
+        }
     } catch (error) {
         console.error("Failed to send submission receipt:", error);
+    }
+};
+
+export const sendPaperStatusUpdate = async (email: string, name: string, paperTitle: string, status: 'approved' | 'rejected') => {
+    if (!resend) {
+        console.warn("Resend API Key missing. Skipping email.");
+        return;
+    }
+
+    try {
+        const { error } = await resend.emails.send({
+            from: 'ICAFM Committee <committee@icafm2026.org>',
+            to: email,
+            subject: `Paper Status Update: ${status.toUpperCase()}`,
+            react: PaperStatusEmail({ firstName: name, paperTitle, status }),
+        });
+
+        if (error) {
+            console.error("Resend Error:", error);
+        }
+    } catch (error) {
+        console.error("Failed to send status update:", error);
     }
 };

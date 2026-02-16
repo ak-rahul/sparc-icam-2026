@@ -50,7 +50,8 @@ export async function submitPaper(formData: FormData) {
     // Send receipt email
     if (user.email) {
         const authorName = user.user_metadata.full_name || 'Author'
-        sendSubmissionReceipt(user.email, authorName, title).catch(console.error)
+        // Pass the track information to the email function
+        await sendSubmissionReceipt(user.email, authorName, title, track).catch(console.error)
     }
 
     revalidatePath('/dashboard')

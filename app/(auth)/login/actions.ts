@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/server'
 import { headers } from 'next/headers'
 
 import { loginSchema, signupSchema } from '@/lib/validations/schemas'
+import { sendWelcomeEmail } from '@/lib/mail'
 
 export async function login(formData: FormData) {
     const supabase = await createClient()
@@ -79,6 +80,9 @@ export async function signup(formData: FormData) {
     if (error) {
         return { error: error.message }
     }
+
+    // Send Welcome Email
+    await sendWelcomeEmail(email, fullName, role as string)
 
     return { success: 'Check your email to continue sign in process.' }
 }

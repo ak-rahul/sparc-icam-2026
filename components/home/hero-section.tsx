@@ -9,8 +9,8 @@ import ShimmerButton from "@/components/ui/shimmer-button"
 import { CountdownTimer } from "@/components/home/countdown-timer"
 
 export function HeroSection() {
-    // Set target date to March 16, 2026 at 12:00 PM
-    const conferenceDate = new Date("2026-03-16T12:00:00")
+    // Set target date to March 05, 2026 at 12:00 PM
+    const conferenceDate = new Date("2026-03-05T12:00:00")
 
     return (
         <section className="relative overflow-hidden py-24 lg:py-32 xl:py-40">
@@ -27,11 +27,12 @@ export function HeroSection() {
                                 <span className="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"></span>
                                 🎉 Registration Open for 2026
                             </div>
-                            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl xl:text-7xl text-balance bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70">
-                                International Conference on <span className="text-primary">Advanced Research</span> 2026
+                            <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl xl:text-6xl text-balance bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70">
+                                International Conference on <span className="text-primary">Advanced Functional Materials</span>
+                                <span className="block text-3xl lg:text-4xl mt-2 text-foreground/80">for Clean Energy, Environment, and Healthcare</span>
                             </h1>
                             <p className="max-w-[600px] text-lg text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                                Join leading researchers, innovators, and industry experts sharing the latest breakthroughs in AI, Data Science, and sustainable technology.
+                                Join leading exerts to discuss the latest innovations in functional materials and their impact on our future.
                             </p>
                         </motion.div>
 
@@ -43,7 +44,7 @@ export function HeroSection() {
                         >
                             <div className="flex items-center gap-2 text-muted-foreground">
                                 <Calendar className="h-5 w-5 text-primary" />
-                                <span className="font-medium">March 16-17, 2026</span>
+                                <span className="font-medium">March 05-06, 2026</span>
                             </div>
                             <div className="flex items-center gap-2 text-muted-foreground">
                                 <MapPin className="h-5 w-5 text-primary" />
