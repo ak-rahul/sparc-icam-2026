@@ -29,10 +29,7 @@ export default function CallForPapersPage() {
                         <div>
                             <h2 className="text-3xl font-bold tracking-tighter mb-4">Submission Guidelines</h2>
                             <p className="text-lg text-muted-foreground leading-relaxed">
-                                ICAM 2026 accepts submissions of original, unpublished research papers. All submissions will be double-blind peer-reviewed by at least three members of the International Program Committee.
-                            </p>
-                            <p className="text-lg text-muted-foreground leading-relaxed mt-4">
-                                Accepted papers will be published in the Conference Proceedings (indexed by Scopus and Web of Science) and selected extended papers will be recommended for publication in partnering high-impact journals.
+                                The conference will feature oral and poster presentation sessions for students, researchers, and research scholars, showcasing ongoing and emerging research aligned with the conference themes.
                             </p>
                         </div>
 
