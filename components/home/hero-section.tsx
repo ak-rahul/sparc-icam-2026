@@ -81,12 +81,12 @@ export function HeroSection() {
                             <CountdownTimer targetDate={conferenceDate} />
                             <div className="w-full max-w-sm space-y-4 pt-6">
                                 <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/50">
-                                    <span className="text-muted-foreground">Abstract Submission:</span>
-                                    <span className="font-bold font-mono">Feb 23, 2026</span>
+                                    <span className="text-muted-foreground">Submission Starts:</span>
+                                    <span className="font-bold font-mono">Feb 3, 2026</span>
                                 </div>
                                 <div className="flex justify-between items-center text-sm p-3 rounded-lg bg-muted/50">
-                                    <span className="text-muted-foreground">Early Bird Reg:</span>
-                                    <span className="font-bold font-mono">Feb 15, 2026</span>
+                                    <span className="text-muted-foreground">Submission Ends:</span>
+                                    <span className="font-bold font-mono">Feb 23, 2026</span>
                                 </div>
                             </div>
                         </div>

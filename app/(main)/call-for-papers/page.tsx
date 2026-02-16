@@ -51,15 +51,11 @@ export default function CallForPapersPage() {
                             <ul className="space-y-3">
                                 <li className="flex items-start gap-3 text-muted-foreground">
                                     <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span>IEEE two-column format, max 8 pages.</span>
-                                </li>
-                                <li className="flex items-start gap-3 text-muted-foreground">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                                     <span>Original, unpublished work is mandatory.</span>
                                 </li>
                                 <li className="flex items-start gap-3 text-muted-foreground">
                                     <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span>PDF format only (max 10MB).</span>
+                                    <span>Word format (.doc/.docx) only (max 10MB).</span>
                                 </li>
                             </ul>
                         </div>
