@@ -112,7 +112,7 @@ export default function ImportantDatesPage() {
                     >
                         <AlertCircle className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0" />
                         <p className="text-sm leading-relaxed">
-                            <strong>Note:</strong> All deadlines are at 11:59 PM Eastern Standard Time (EST). Deadlines are strict and no extensions will be granted.
+                            <strong>Note:</strong> All deadlines are at 11:59 PM Indian Standard Time (IST). Deadlines are strict and no extensions will be granted.
                         </p>
                     </motion.div>
                 </div>
