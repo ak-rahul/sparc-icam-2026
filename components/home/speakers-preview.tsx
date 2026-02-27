@@ -74,8 +74,8 @@ export function SpeakersPreview() {
                                         />
                                     </div>
 
-                                    <div className="relative z-20 -mt-16 flex flex-col items-center w-full px-6 pb-8 text-center space-y-3 flex-grow justify-end">
-                                        <div className="relative h-16 w-16 rounded-full border-4 border-background shadow-lg overflow-hidden bg-muted mb-2">
+                                    <div className="relative z-20 -mt-8 flex flex-col items-center w-full px-6 pb-8 text-center space-y-3 flex-grow justify-start pt-2">
+                                        <div className="relative shrink-0 h-16 w-16 rounded-full border-4 border-background shadow-lg overflow-hidden bg-muted mb-2">
                                             <Image
                                                 src={speaker.image}
                                                 alt={speaker.initials}
@@ -83,7 +83,7 @@ export function SpeakersPreview() {
                                                 placeholder="blur"
                                                 className="object-cover"
                                                 style={{
-                                                    objectPosition: speaker.position || 'center',
+                                                    objectPosition: speaker.avatarPosition || speaker.position || 'center',
                                                     transform: speaker.scale ? `scale(${speaker.scale})` : undefined
                                                 }}
                                             />
