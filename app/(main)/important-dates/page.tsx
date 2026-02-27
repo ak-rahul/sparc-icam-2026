@@ -4,45 +4,13 @@ import { PageHeader } from "@/components/layout/page-header"
 import { Calendar, Clock, AlertCircle, ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { conferenceEvents } from "@/lib/dates"
 
 const getDates = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
 
-    const events = [
-        {
-            event: "Abstract Submission Starts",
-            dateStr: "February 03, 2026",
-            date: new Date("2026-02-03"),
-            description: "Portal opens for abstract and full paper submissions.",
-        },
-        {
-            event: "Abstract Submission Ends",
-            dateStr: "February 23, 2026",
-            date: new Date("2026-02-23"),
-            description: "Deadline for submitting broad abstracts and papers.",
-        },
-        {
-            event: "Registration Deadline",
-            dateStr: "February 25, 2026",
-            date: new Date("2026-02-25"),
-            description: "Last date to register for the conference.",
-        },
-        {
-            event: "Notification of Acceptance",
-            dateStr: "February 28, 2026",
-            date: new Date("2026-02-28"),
-            description: "Authors will be notified of review results.",
-        },
-        {
-            event: "Conference Dates",
-            dateStr: "March 05-06, 2026",
-            date: new Date("2026-03-05"), // Using start date for comparison
-            description: "The main event at CUSAT.",
-        }
-    ];
-
-    return events.map(item => {
+    return conferenceEvents.map(item => {
         const isPast = item.date < today;
         const isToday = item.date.toDateString() === today.toDateString();
 
