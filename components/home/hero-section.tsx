@@ -6,10 +6,25 @@ import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 import { CountdownTimer } from "@/components/home/countdown-timer"
+import { getCurrentPhaseConfig } from "@/lib/dates"
+import { useState, useEffect } from "react"
 
 export function HeroSection() {
-    // Set target date to March 05, 2026 at 12:00 PM
-    const conferenceDate = new Date("2026-03-05T12:00:00")
+    const [phaseConfig, setPhaseConfig] = useState<ReturnType<typeof getCurrentPhaseConfig> | null>(null);
+
+    useEffect(() => {
+        setPhaseConfig(getCurrentPhaseConfig());
+    }, []);
+
+    const config = phaseConfig || {
+        currentPhaseTitle: "Abstract Submission",
+        nextDeadlineTitle: "Until abstract submission ends",
+        statusText: "Open Now",
+        progressPercent: 75,
+        targetDate: new Date("2026-02-23T23:59:59"),
+        phaseStart: new Date("2026-02-03T00:00:00"),
+        phaseEnd: new Date("2026-02-23T23:59:59"),
+    };
 
     return (
         <section className="relative overflow-hidden py-20 lg:py-28 min-h-screen flex items-center justify-center">
@@ -85,19 +100,22 @@ export function HeroSection() {
                                     <p className="text-muted-foreground text-sm">Until the conference begins</p>
                                 </div>
 
-                                <CountdownTimer targetDate={conferenceDate} />
+                                <CountdownTimer targetDate={config.targetDate} />
 
                                 <div className="space-y-3 pt-6 border-t border-border/50">
                                     <div className="flex justify-between items-center text-sm">
-                                        <span className="text-muted-foreground">Abstract Submission</span>
-                                        <span className="font-mono font-medium text-primary">Open Now</span>
+                                        <span className="text-muted-foreground">{config.currentPhaseTitle}</span>
+                                        <span className="font-mono font-medium text-primary">{config.statusText}</span>
                                     </div>
                                     <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                                        <div className="h-full bg-primary w-[75%] rounded-full animate-pulse" />
+                                        <div
+                                            className="h-full bg-primary rounded-full transition-all duration-1000"
+                                            style={{ width: `${Math.round(config.progressPercent)}%` }}
+                                        />
                                     </div>
                                     <div className="flex justify-between text-xs text-muted-foreground">
-                                        <span>Starts: Feb 03</span>
-                                        <span>Ends: Feb 23</span>
+                                        <span>Starts: {config.phaseStart.toLocaleDateString("en-US", { month: "short", day: "2-digit" })}</span>
+                                        <span>Ends: {config.phaseEnd.toLocaleDateString("en-US", { month: "short", day: "2-digit" })}</span>
                                     </div>
                                 </div>
                             </div>

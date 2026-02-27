@@ -9,21 +9,26 @@ interface CountdownTimerProps {
 
 export function CountdownTimer({ targetDate }: CountdownTimerProps) {
     const [timeLeft, setTimeLeft] = useState(0)
+    const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
-        const timer = setInterval(() => {
+        setMounted(true)
+
+        const updateTimer = () => {
             const now = new Date()
             const diff = differenceInSeconds(targetDate, now)
-            if (diff <= 0) {
-                clearInterval(timer)
-                setTimeLeft(0)
-            } else {
-                setTimeLeft(diff)
-            }
-        }, 1000)
+            setTimeLeft(diff > 0 ? diff : 0)
+        }
+
+        updateTimer() // Calculate immediately
+        const timer = setInterval(updateTimer, 1000)
 
         return () => clearInterval(timer)
     }, [targetDate])
+
+    if (!mounted) {
+        return null // Avoid rendering 0s to prevent layout flicker
+    }
 
     const days = Math.floor(timeLeft / (3600 * 24))
     const hours = Math.floor((timeLeft % (3600 * 24)) / 3600)
