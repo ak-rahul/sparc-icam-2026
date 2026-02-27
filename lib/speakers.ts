@@ -10,6 +10,8 @@ import Speaker8 from "@/assets/speakers/8.jpeg"
 import Speaker9 from "@/assets/speakers/9.jpeg"
 import Speaker10 from "@/assets/speakers/10.jpeg"
 import Speaker11 from "@/assets/speakers/11.jpeg"
+import Speaker12 from "@/assets/speakers/12.jpeg"
+import Speaker13 from "@/assets/speakers/13.jpeg"
 
 export const speakers = [
     {
@@ -94,5 +96,23 @@ export const speakers = [
         image: Speaker11,
         initials: "SM",
         scale: 1.5,
+    },
+    {
+        name: "Dr. Ranganathan Subramanian",
+        role: "Department of Chemistry, IIT Patna",
+        bio: "Associate Professor and Head of the Department of Chemistry at IIT Patna.",
+        image: Speaker12,
+        initials: "RS",
+        position: "center 10%",
+        avatarPosition: "center 10%"
+    },
+    {
+        name: "Prof. Prem Felix Siril",
+        role: "Department of Chemistry, IIT Mandi",
+        bio: "Associate Professor of Chemistry at IIT Mandi.",
+        image: Speaker13,
+        initials: "PS",
+        position: "center 5%",
+        avatarPosition: "center top"
     },
 ]
